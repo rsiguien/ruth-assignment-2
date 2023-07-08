@@ -6,8 +6,8 @@ public class HigherLowerGuessingGame {
 
 	public static void main(String[] args) {
 		NumberChecker nc = new NumberChecker();
-        Scanner scanner = new Scanner(System.in);
-        Integer flag = null;
+        Scanner scanner = new Scanner(System.in); 
+        boolean is_valid = false;
         int guess_counter = 1;
         boolean win = false;
         int rnd_num = nc.randomizer();
@@ -20,7 +20,7 @@ public class HigherLowerGuessingGame {
         	//this is for debugging purposes only
         	//System.out.println("Guess count: " + guess_counts);
             
-            while(flag == null) {
+            while(!is_valid) {
 
                 System.out.print("Pick a number between 1 and 100 ");
                 int num_entry = Integer.parseInt(scanner.nextLine());
@@ -32,11 +32,13 @@ public class HigherLowerGuessingGame {
                     
                     if(num_entry > rnd_num){
                         System.out.println("Please pick a lower number ");
+                        is_valid=true;
                         break;
                     }
                         
                     if(num_entry < rnd_num){
                         System.out.println("Please pick a higher number ");
+                        is_valid=true;
                         break;
                     }
                         
@@ -56,7 +58,7 @@ public class HigherLowerGuessingGame {
 
             }
             
-            flag = null;
+           
             
             if(win) {
                 // this is to exit the outer loop
@@ -69,8 +71,12 @@ public class HigherLowerGuessingGame {
                 System.out.println("The number to guess was: " + rnd_num);
             }
             
-            
-            guess_counter++;
+            if(is_valid) {
+            	guess_counter++;
+            	is_valid=false;
+            	
+            }
+            	
             
         }
         
